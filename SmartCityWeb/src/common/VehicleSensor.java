@@ -1,4 +1,4 @@
-package sakao_common;
+package common;
 
 import java.sql.Date;;
 

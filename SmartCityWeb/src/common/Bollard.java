@@ -1,4 +1,4 @@
-package sakao_common;
+package common;
 
 public class Bollard {
 
