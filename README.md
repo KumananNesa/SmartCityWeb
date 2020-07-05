@@ -1,2 +1,0 @@
-# SmartCityWeb
-SmartCityWeb
