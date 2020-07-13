@@ -1,8 +1,0 @@
-[
-        {"id": 1, "sensortype":"Input", "numberofvehicle":10,"adresse" : "Rue 1"},
-        {"id":2, "sensortype":"Output", "numberofvehicle":20,"adresse" : "Rue 2"},
-        {"id":3, "sensortype":"Input", "numberofvehicle":30,"adresse" : "Rue 3"},
-        {"id":4, "sensortype":"Output", "numberofvehicle":40,"adresse" : "Rue 4"},
-        {"id":5, "sensortype":"Input", "numberofvehicle":50,"adresse" : "Rue 5"},
-        {"id":6, "sensortype":"Output", "numberofvehicle":60,"adresse" : "Rue 6"}
- ]
