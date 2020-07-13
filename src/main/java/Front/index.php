@@ -4,50 +4,26 @@
     <title>Information vehicle sensor</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="styles.css" />
+    
   </head>
   <body>
-    <table id="rankings-table" class="table">
+    <table class="table table-striped">
 
-    <thead>
-      <tr>
-        <th>Ranking</th>
-        <th>Full name</th>
-        <th> Points </th>
-      </tr>
-      </thead>
+    	   <thead>
+    <tr  class="bg-info">
+        <th>Name</th>
+        <th>Age</th>
+        <th>Birthday</th>
+    </tr>
 
-    <tbody>
-<!-- Filled by js -->
-      <!-- <tr>
-        <td>1</td>
-        <td>DOM</td>
-        <td>1.341</td>
-      </tr>
+    </thead>
 
-
-      <tr>
-
-        <td>2</td>
-        <td>Naomi</td>
-        <td>1.121</td>
+    <tbody id="myTable">
         
-      </tr>
+    </tbody>
+</table>
 
-      <tr>
-
-        <td>3</td>
-        <td>Sarah</td>
-        <td>932</td>
-        
-      </tr> -->
-
-
-      </tbody>
-
-
-    </table>
-
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="app.js">  </script>
   </body>
 </html>

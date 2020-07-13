@@ -1,6 +1,8 @@
 [
-    [1,"DOM",1340,10],
-    [2,"SUSY",100,10],
-    [3,"LAZY",10,10],
-    [4,"DLAZY",11,11]
-]
+        {"name":"Michael", "age":"23", "birthdate":"11/10/1989"},
+        {"name":"Mila", "age":"32", "birthdate":"10/1/1989"},
+        {"name":"Paul", "age":"29", "birthdate":"10/14/1990"},
+        {"name":"Dennis", "age":"25", "birthdate":"11/29/1993"},
+        {"name":"Tim", "age":"27", "birthdate":"3/12/1991"},
+        {"name":"Erik", "age":"24", "birthdate":"10/31/1995"}
+ ]
