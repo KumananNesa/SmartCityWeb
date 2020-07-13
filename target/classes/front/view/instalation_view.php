@@ -1,19 +1,14 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Information vehicle sensor</title>
-    <meta charset="utf-8" />
-    <link rel="stylesheet" href="styles.css" />
-    
-  </head>
-  <body>
+<?php require_once("header.php"); ?>
+
+
     <table class="table table-striped">
 
     	   <thead>
     <tr  class="bg-info">
-        <th>Name</th>
-        <th>Age</th>
-        <th>Birthday</th>
+        <th>ID</th>
+        <th>Sensor Type</th>
+        <th>Number of vehicles</th>
+        <th>Location</th>
     </tr>
 
     </thead>
@@ -25,5 +20,4 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="app.js">  </script>
-  </body>
-</html>
+    <?php require_once("footer.php"); ?>
