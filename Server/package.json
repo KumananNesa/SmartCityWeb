@@ -1,0 +1,29 @@
+{
+  "name": "smartcityweb",
+  "version": "1.0.0",
+  "description": "A Node.js Restful API Project for SmartCityWeb",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KumananNesa/SmartCityWeb.git"
+  },
+  "keywords": [
+    "node",
+    "restful",
+    "api",
+    "for",
+    "smartcity"
+  ],
+  "author": "Kumanan NESARAJAH",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KumananNesa/SmartCityWeb/issues"
+  },
+  "homepage": "https://github.com/KumananNesa/SmartCityWeb#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
