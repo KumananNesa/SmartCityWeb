@@ -4,7 +4,6 @@ const rooter = express.Router();
 
 rooter.get('/',(req,res,next) => {
     
-    console.log('here');
     res.status(200).json({
         
         message : 'Handling Get requests to / products'
@@ -17,7 +16,7 @@ rooter.get('/',(req,res,next) => {
 
 rooter.post('/',(req,res,next) => {
     
-    res.status(200).json({
+    res.status(201).json({
         
         message : 'Handling Post requests to / products'
         
@@ -25,6 +24,56 @@ rooter.post('/',(req,res,next) => {
     
 });
 
-rooter.get('/:productId')
+rooter.get('/:productId',(req,res,next) => {
+
+    const id = req.params.productId;
+
+    if(id === 'special'){
+
+        res.status(200).json({
+        
+            message : 'You discover a special ID',
+            id : id
+            
+        });
+
+
+} else{
+    
+    res.status(200).json({
+        
+        message : 'You passed an id'
+        
+    });
+
+}
+
+
+});
+
+
+rooter.patch('/:productId',(req,res,next) => {
+
+    res.status(200).json({
+        
+        message : 'Updated product'
+        
+    });
+
+
+});
+
+rooter.delete('/:productId',(req,res,next) => {
+
+    res.status(200).json({
+        
+        message : 'Delete product'
+        
+    });
+
+
+});
+
+
 
 module.exports = rooter;
