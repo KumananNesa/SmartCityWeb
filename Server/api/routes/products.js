@@ -15,10 +15,14 @@ rooter.get('/',(req,res,next) => {
 
 
 rooter.post('/',(req,res,next) => {
-    
+    const product = {
+        name : req.body.name,
+        price : req.body.price
+    };
     res.status(201).json({
         
-        message : 'Handling Post requests to / products'
+        message : 'Handling Post requests to / products',
+        createdProduct : product
         
     });
     
