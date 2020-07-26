@@ -18,7 +18,8 @@ httpRequest.onreadystatechange = function () {
     }
 }
 
-httpRequest.open('get', 'data/rankings.json', true);
+
+httpRequest.open('get', 'http://localhost:8080/customers', true);
 httpRequest.send()
 
 
@@ -29,9 +30,9 @@ function buildTable(data) {
     for (var i = 0; i < data.length; i++) {
         var row = `<tr>
                             <td>${data[i].id}</td>
-                            <td>${data[i].sensortype}</td>
-                            <td>${data[i].numberofvehicle}</td>
-                            <td>${data[i].adresse}</td>
+                            <td>${data[i].email}</td>
+                            <td>${data[i].name}</td>
+                            <td>${data[i].active}</td>
                       </tr>`
         table.innerHTML += row
 
