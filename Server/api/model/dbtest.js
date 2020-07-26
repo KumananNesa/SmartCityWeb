@@ -1,4 +1,6 @@
-function dbconnect(){
+//A SUPPRIMER APRES AVOIR FAIT LES TEST
+
+var db = function dbconnect(){
 
 var mysql      = require('mysql');
 var connection = mysql.createConnection({
@@ -24,10 +26,10 @@ function insertUser (){
     var mdp ="123"
     var pseudo ="leo"
 
-    var db = dbconnect();
+    var db1 = db();
     var data =  [pseudo,email,mdp];
 
-    db.query('INSERT INTO user SET pseudo=?, email=?, mdp=?',data,(err,user,field)=> {
+    db1.query('INSERT INTO user SET pseudo=?, email=?, mdp=?',data,(err,user,field)=> {
         if(err) throw err
 
 
@@ -36,15 +38,15 @@ function insertUser (){
 
 }
 
-//getuser();
+getuser();
 
 function getuser (){
 
-    var db = dbconnect();
+    var db1 = db();
 
     var data =  ['leo',"email@exemple.com" ];
 
-    db.query('SELECT * FROM USER '/*WHERE pseudo = ? and email =?',data*/,(err,user,field)=> {     
+    db1.query('SELECT * FROM USER '/*WHERE pseudo = ? and email =?',data*/,(err,user,field)=> {     
         if(err) throw err;
         console.log(user);
 
@@ -56,11 +58,11 @@ function getuser (){
 //updateUser()
 function updateUser(){
 
-    var db = dbconnect();
+    var db1 = db();
 
     var data =  ['999',3];
 
-    db.query('UPDATE user SET mdp=? WHERE id = ?',data,(err,user,field)=> {     
+    db1.query('UPDATE user SET mdp=? WHERE id = ?',data,(err,user,field)=> {     
         if(err) throw err;
        // console.log(user);
 
@@ -74,10 +76,10 @@ function updateUser(){
 
 function deleteUser (){
 
-    var db = dbconnect();
+    var db1 = db();
     var data = [1]
 
-    db.query('DELETE FROM USER WHERE id =?',data,(err,result ,field)=> {     
+    db1.query('DELETE FROM USER WHERE id =?',data,(err,result ,field)=> {     
         if(err) throw err;
         
 

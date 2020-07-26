@@ -1,19 +1,22 @@
 const express = require('express');
 
 const app = express();
-const morgan = require('morgan');
-const bodyParser =  require('body-parser');
-
-
-
-
-const productRoutes = require('./api/routes/products');
-const orderRoutes = require('./api/routes/orders');
+const morgan = require('morgan'); //Affiche req sur server
+const bodyParser =  require('body-parser'); // parse bidy for post
 
 app.use(morgan('dev'))
-app.use(bodyParser.urlencoded({ extended: false}));
-app.use(bodyParser.json());
 
+// parse requests of content-type - application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false}));
+
+// parse requests of content-type - application/json
+app.use(bodyParser.json()); 
+
+
+
+
+
+//CORS
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header(
@@ -28,9 +31,32 @@ app.use((req, res, next) => {
   });
 
 
-app.use('/products', productRoutes); // pas besoin de preciser
-app.use('/orders', orderRoutes);
+  //simple root
+  app.get("/", (req, res) => {
+    res.json({ message: "Welcome to Smartcityweb application." });
+  });
 
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//A SUPPRIMER APRES AVOIR FAIT LES TEST
+const productRoutes = require('./api/routes/products');// import
+const orderRoutes = require('./api/routes/orders');
+
+
+
+app.use('/products', productRoutes); // pas besoin de preciser le chelin dans app
+app.use('/orders', orderRoutes); //pas besoin de preciser le chelin dans app
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+require("./api/routes/customer.routes.js")(app);
+
+
+
+
+//Gestion des erreurs  /// A REVOIR
 app.use((req,res,next) => {
 
     const error = new Error("Not found");
@@ -57,16 +83,6 @@ module.exports = app;
 
 
 
-/*app.use((req,res,next)=> {
 
-        res.status(200).json({
-            
-            message : 'OKOKOK THAT OKKK FOR 8080 !'
-            
-            
-        });
-
-
-});*/
 
 
