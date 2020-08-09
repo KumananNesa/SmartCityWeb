@@ -53,6 +53,7 @@ describe('/GET customer', () => {
     it('it should  POST a customer', (done) => {
         // exemple to post
         var customer = {
+            
             "email" : "WilAime@prontonmail.com",
             "name" : "Willam",
             "active" : true
@@ -112,11 +113,13 @@ describe('/PUT/:id customer', () => {
         }
         
         chai.request(server)
-          .put('/customers/20') // exemple
+          .put('/customers/23') // exemple
+          .send(customer)
           .end((err, res) => {
             res.should.have.status(200);
          res.body.should.be.a('object');
-          // res.body.should.have.property('name').eql('DAMSIEN');
+         res.body.should.have.property('name').eql('DAMSIEN');
+
               
                 
             
@@ -128,7 +131,7 @@ describe('/PUT/:id customer', () => {
 describe('/DELETE/:id customer', () => {
     it('it should DELETE a customer by the given id', (done) => {
           chai.request(server)
-          .delete('/customers/31') // exemple a changer
+          .delete('/customers/32') // exemple a changer
           .end((err, res) => {
             res.should.have.status(200);
             res.body.should.be.a('object');
