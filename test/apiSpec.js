@@ -103,8 +103,77 @@ describe('/GET/:id customer', () => {
     });
 }); 
 
-describe('/PUT/:id customer', () => {
-    it('it should UPDATE a customer by the given id', (done) => {
+
+
+describe('/GET/:id ERROR ID NOT EXIST', () => {
+  it('it should give a message  : Not found Customer with id', (done) => {
+        chai.request(server)
+        .get('/customers/25') // exemple
+        .end((err, res) => {
+              res.should.have.status(404);
+              res.body.should.be.a('object');
+              res.body.should.have.property('message').eql('Not found Customer with id 25.');
+            
+              
+          
+          done();
+        });
+  });
+}); 
+
+
+describe('/POST ERROR', () => {
+  it('it should  give a message : ER_BAD_NULL_ERROR: Le champ \'email\' ne peut être vide (null)', (done) => {
+      // exemple to post
+      var customer = {
+          
+ 
+      }
+        chai.request(server)
+        .post('/customers')
+        .send(customer)
+        .end((err, res) => {
+              res.should.have.status(500);
+              res.body.should.be.a('object');
+              res.body.should.have.property('message').eql('ER_BAD_NULL_ERROR: Le champ \'email\' ne peut être vide (null)');
+              
+              //res.body.errors.should.have.property('pages');
+              //res.body.errors.pages.should.have.property('kind').eql('required');
+          done();
+        });
+  });
+
+});
+
+
+
+describe('/POST ERROR', () => {
+  it('it should  give a message : ER_BAD_NULL_ERROR: Le champ \'name\' ne peut être vide (null)', (done) => {
+      // exemple to post
+      var customer = {
+        "email" : "DAMcSIEN@prontonmail.com"
+ 
+      }
+        chai.request(server)
+        .post('/customers')
+        .send(customer)
+        .end((err, res) => {
+              res.should.have.status(500);
+              res.body.should.be.a('object');
+              res.body.should.have.property('message').eql('ER_BAD_NULL_ERROR: Le champ \'name\' ne peut être vide (null)');
+              
+              //res.body.errors.should.have.property('pages');
+              //res.body.errors.pages.should.have.property('kind').eql('required');
+          done();
+        });
+  });
+
+});
+
+
+
+describe('/PUT/:ERROR NOT FOUND', () => {
+    it('it should give a message : Not found', (done) => {
         
         var customer = {
             "email" : "WilAime@prontonmail.com",
@@ -113,13 +182,13 @@ describe('/PUT/:id customer', () => {
         }
         
         chai.request(server)
-          .put('/customers/23') // exemple
+          .put('/customers') // exemple
           .send(customer)
           .end((err, res) => {
-            res.should.have.status(200);
+            res.should.have.status(404);
          res.body.should.be.a('object');
-         res.body.should.have.property('name').eql('DAMSIEN');
-
+       //  res.body.should.have.property('message').eql('Not found');
+       res.body.error.should.have.property('message').eql('Not found');
               
                 
             
@@ -128,6 +197,58 @@ describe('/PUT/:id customer', () => {
     });
 }); 
 
+
+describe('/PUT/:id ERROR ', () => {
+  it('it should give a message : Not found Customer with id 1.', (done) => {
+      
+      var customer = {
+          "email" : "WilAime@prontonmail.com",
+          "name" : "DAMSIEN",
+          "active" : true
+      }
+      
+      chai.request(server)
+        .put('/customers/1') // exemple
+        .send(customer)
+        .end((err, res) => {
+          res.should.have.status(404);
+       res.body.should.be.a('object');
+      res.body.should.have.property('message').eql('Not found Customer with id 1.');
+    // res.body.error.should.have.property('message').eql('Not found');
+            
+              
+          
+          done();
+        });
+  });
+}); 
+
+
+describe('/PUT/:id ERROR', () => {
+  it('it should UPDATE a customer by the given id', (done) => {
+      
+      var customer = {
+          "email" : "WilAime@prontonmail.com",
+          "name" : "DAMSIEN",
+          "active" : true
+      }
+      
+      chai.request(server)
+        .put('/customers/23') // exemple
+        .send(customer)
+        .end((err, res) => {
+          res.should.have.status(200);
+       res.body.should.be.a('object');
+       res.body.should.have.property('name').eql('DAMSIEN');
+
+            
+              
+          
+          done();
+        });
+  });
+}); 
+/*
 describe('/DELETE/:id customer', () => {
     it('it should DELETE a customer by the given id', (done) => {
           chai.request(server)
@@ -139,4 +260,4 @@ describe('/DELETE/:id customer', () => {
             done();
           });
     });
-}); 
+}); */
