@@ -213,7 +213,7 @@ describe('/PUT/:id ERROR ', () => {
         .end((err, res) => {
           res.should.have.status(404);
        res.body.should.be.a('object');
-      res.body.should.have.property('message').eql('Not found Customer with id 1.');
+      res.body.should.have.property('message').eql('Not found');
     // res.body.error.should.have.property('message').eql('Not found');
             
               
