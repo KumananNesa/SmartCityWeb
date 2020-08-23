@@ -12,9 +12,9 @@ exports.create = (req, res) => {
 
   // Create a Sensor
   const sensor = new Sensor({
-    email: req.body.email,
-    name: req.body.name,
-    active: req.body.active
+    sensortype: req.body.sensortype,
+    numberofvehicle: req.body.numberofvehicle,
+    idbollard: req.body.idbollard
   });
 
   // Save Sensor in the database

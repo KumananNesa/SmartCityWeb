@@ -5,23 +5,24 @@ const Sensor = function(sensor) {
   this.sensortype = sensor.sensortype;
   this.numberofvehicle = sensor.numberofvehicle;
   this.idbollard = sensor.idbollard;
+
 };
 
-Sensor.create = (newCustomer, result) => {
-  sql.query("INSERT INTO customers SET ?", newCustomer, (err, res) => {
+Sensor.create = (newSensor, result) => {
+  sql.query("INSERT INTO vehicleSensor SET ?", newSensor, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
       return;
     }
 
-    console.log("created customer: ", { id: res.insertId, ...newCustomer });
-    result(null, { id: res.insertId, ...newCustomer });
+    console.log("created sensor: ", { id: res.insertId, ...newSensor });
+    result(null, { id: res.insertId, ...newSensor });
   });
 };
 
-Sensor.findById = (customerId, result) => {
-  sql.query(`SELECT * FROM customers WHERE id = ${customerId}`, (err, res) => {
+Sensor.findById = (sensorId, result) => {
+  sql.query(`SELECT * FROM vehicleSensor WHERE id = ${sensorId}`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -29,33 +30,33 @@ Sensor.findById = (customerId, result) => {
     }
 
     if (res.length) {
-      console.log("found customer: ", res[0]);
+      console.log("found sensor: ", res[0]);
       result(null, res[0]);
       return;
     }
 
-    // not found Customer with the id
+    // not found sensor with the id
     result({ kind: "not_found" }, null);
   });
 };
 
 Sensor.getAll = result => {
-  sql.query("SELECT * FROM customers", (err, res) => {
+  sql.query("SELECT * FROM vehicleSensor", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
       return;
     }
 
-    console.log("customers: ", res);
+    console.log("sensors: ", res);
     result(null, res);
   });
 };
 
-Sensor.updateById = (id, customer, result) => {
+Sensor.updateById = (id, sensor, result) => {
   sql.query(
-    "UPDATE customers SET email = ?, name = ?, active = ? WHERE id = ?",
-    [customer.email, customer.name, customer.active, id],
+    "UPDATE vehicleSensor SET sensortype = ?, numberofvehicle = ?, idbollard = ? WHERE id = ?",
+    [sensor.sensortype, sensor.numberofvehicle, sensor.idbollard, id],
     (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -64,19 +65,19 @@ Sensor.updateById = (id, customer, result) => {
       }
 
       if (res.affectedRows == 0) {
-        // not found Customer with the id
+        // not found sensor with the id
         result({ kind: "not_found" }, null);
         return;
       }
 
-      console.log("updated customer: ", { id: id, ...customer });
-      result(null, { id: id, ...customer });
+      console.log("updated Sensor: ", { id: id, ...sensor });
+      result(null, { id: id, ...sensor });
     }
   );
 };
 
 Sensor.remove = (id, result) => {
-  sql.query("DELETE FROM customers WHERE id = ?", id, (err, res) => {
+  sql.query("DELETE FROM vehicleSensor WHERE id = ?", id, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -84,25 +85,25 @@ Sensor.remove = (id, result) => {
     }
 
     if (res.affectedRows == 0) {
-      // not found Customer with the id
+      // not found sensor with the id
       result({ kind: "not_found" }, null);
       return;
     }
 
-    console.log("deleted customer with id: ", id);
+    console.log("deleted vehicleSensor with id: ", id);
     result(null, res);
   });
 };
 
 Sensor.removeAll = result => {
-  sql.query("DELETE FROM customers", (err, res) => {
+  sql.query("DELETE FROM vehicleSensor", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
       return;
     }
 
-    console.log(`deleted ${res.affectedRows} customers`);
+    console.log(`deleted ${res.affectedRows} vehicleSensor`);
     result(null, res);
   });
 };
