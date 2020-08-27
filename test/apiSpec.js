@@ -32,10 +32,10 @@ describe ('test de text', function(){
   */
 
 
-describe('/GET customer', () => {
-    it('it should GET all the custommer', (done) => {
+describe('/GET sensor', () => {
+    it('it should GET all the sensor', (done) => {
           chai.request(server)
-          .get('/customers')
+          .get('/sensors')
           .end((err, res) => {
                 res.should.have.status(200);
                 res.body.should.be.a('array');
@@ -49,28 +49,24 @@ describe('/GET customer', () => {
 /*
   * Test the /POST route
   */
- describe('/POST customer', () => {
-    it('it should  POST a customer', (done) => {
+ describe('/POST sensor', () => {
+    it('it should  POST a sensor', (done) => {
         // exemple to post
-        var customer = {
+        var sensor = {
             
-            "email" : "WilAime@prontonmail.com",
-            "name" : "Willam",
-            "active" : true
+            "sensortype" : "input",
+            "numberofvehicle" : 12,
+            "idbollard" : 14
         }
           chai.request(server)
-          .post('/customers')
-          .send(customer/*{
-            'email' : 'WilAime@prontonmail.com',
-            'name' : 'Willam',
-            'active' : true
-        }*/)
+          .post('/sensors')
+          .send(sensor)
           .end((err, res) => {
                 res.should.have.status(200);
                 res.body.should.be.a('object');
-                res.body.should.have.property('email');
-                res.body.should.have.property('name');
-                res.body.should.have.property('active');
+                res.body.should.have.property('sensortype');
+                res.body.should.have.property('numberofvehicle');
+                res.body.should.have.property('idbollard');
                 
                 //res.body.errors.should.have.property('pages');
                 //res.body.errors.pages.should.have.property('kind').eql('required');
@@ -85,16 +81,16 @@ describe('/GET customer', () => {
   * Test the /GET/:id route
   */
 
-describe('/GET/:id customer', () => {
-    it('it should GET a customer by the given id', (done) => {
+describe('/GET/:id sensor', () => {
+    it('it should GET a sensor by the given id', (done) => {
           chai.request(server)
-          .get('/customers/4') // exemple
+          .get('/sensors/4') // exemple
           .end((err, res) => {
                 res.should.have.status(200);
                 res.body.should.be.a('object');
-                res.body.should.have.property('email');
-                res.body.should.have.property('name');
-                res.body.should.have.property('active');
+                res.body.should.have.property('sensortype');
+                res.body.should.have.property('numberofvehicle');
+                res.body.should.have.property('idbollard');
               
                 
             
@@ -106,13 +102,13 @@ describe('/GET/:id customer', () => {
 
 
 describe('/GET/:id ERROR ID NOT EXIST', () => {
-  it('it should give a message  : Not found Customer with id', (done) => {
+  it('it should give a message  : Not found Sensor with id', (done) => {
         chai.request(server)
-        .get('/customers/25') // exemple
+        .get('/sensors/25') // exemple
         .end((err, res) => {
               res.should.have.status(404);
               res.body.should.be.a('object');
-              res.body.should.have.property('message').eql('Not found Customer with id 25.');
+              res.body.should.have.property('message').eql('Not found Sensor with id 25.');
             
               
           
@@ -123,19 +119,19 @@ describe('/GET/:id ERROR ID NOT EXIST', () => {
 
 
 describe('/POST ERROR', () => {
-  it('it should  give a message : ER_BAD_NULL_ERROR: Le champ \'email\' ne peut être vide (null)', (done) => {
+  it('it should  give a message : ER_BAD_NULL_ERROR: Le champ \'sensortype\' ne peut être vide (null)', (done) => {
       // exemple to post
-      var customer = {
+      var sensor = {
           
  
       }
         chai.request(server)
-        .post('/customers')
-        .send(customer)
+        .post('/sensors')
+        .send(sensor)
         .end((err, res) => {
               res.should.have.status(500);
               res.body.should.be.a('object');
-              res.body.should.have.property('message').eql('ER_BAD_NULL_ERROR: Le champ \'email\' ne peut être vide (null)');
+              res.body.should.have.property('message').eql('ER_BAD_NULL_ERROR: Le champ \'sensortype\' ne peut être vide (null)');
               
               //res.body.errors.should.have.property('pages');
               //res.body.errors.pages.should.have.property('kind').eql('required');
@@ -148,19 +144,19 @@ describe('/POST ERROR', () => {
 
 
 describe('/POST ERROR', () => {
-  it('it should  give a message : ER_BAD_NULL_ERROR: Le champ \'name\' ne peut être vide (null)', (done) => {
+  it('it should  give a message : ER_BAD_NULL_ERROR: Le champ \'numberofvehicle\' ne peut être vide (null)', (done) => {
       // exemple to post
-      var customer = {
-        "email" : "DAMcSIEN@prontonmail.com"
+      var sensor = {
+        "sensortype" : "input"
  
       }
         chai.request(server)
-        .post('/customers')
-        .send(customer)
+        .post('/sensors')
+        .send(sensor)
         .end((err, res) => {
               res.should.have.status(500);
               res.body.should.be.a('object');
-              res.body.should.have.property('message').eql('ER_BAD_NULL_ERROR: Le champ \'name\' ne peut être vide (null)');
+              res.body.should.have.property('message').eql('ER_BAD_NULL_ERROR: Le champ \'numberofvehicle\' ne peut être vide (null)');
               
               //res.body.errors.should.have.property('pages');
               //res.body.errors.pages.should.have.property('kind').eql('required');
@@ -175,15 +171,15 @@ describe('/POST ERROR', () => {
 describe('/PUT/:ERROR NOT FOUND', () => {
     it('it should give a message : Not found', (done) => {
         
-        var customer = {
-            "email" : "WilAime@prontonmail.com",
-            "name" : "DAMSIEN",
-            "active" : true
+        var sensor = {
+          "sensortype" : "input",
+          "numberofvehicle" : 12,
+          "idbollard" : 14
         }
         
         chai.request(server)
-          .put('/customers') // exemple
-          .send(customer)
+          .put('/sensors') // exemple
+          .send(sensor)
           .end((err, res) => {
             res.should.have.status(404);
          res.body.should.be.a('object');
@@ -199,21 +195,21 @@ describe('/PUT/:ERROR NOT FOUND', () => {
 
 
 describe('/PUT/:id ERROR ', () => {
-  it('it should give a message : Not found Customer with id 1.', (done) => {
+  it('it should give a message : Not found sensor with id 1.', (done) => {
       
-      var customer = {
-          "email" : "WilAime@prontonmail.com",
-          "name" : "DAMSIEN",
-          "active" : true
+      var sensor = {
+        "sensortype" : "input",
+        "numberofvehicle" : 12,
+        "idbollard" : 14
       }
       
       chai.request(server)
-        .put('/customers/1') // exemple
-        .send(customer)
+        .put('/sensors/25') // exemple
+        .send(sensor)
         .end((err, res) => {
           res.should.have.status(404);
        res.body.should.be.a('object');
-      res.body.should.have.property('message').eql('Not found');
+      res.body.should.have.property('message').eql('Not found Sensors with id 25.');
     // res.body.error.should.have.property('message').eql('Not found');
             
               
@@ -225,21 +221,21 @@ describe('/PUT/:id ERROR ', () => {
 
 
 describe('/PUT/:id ERROR', () => {
-  it('it should UPDATE a customer by the given id', (done) => {
+  it('it should UPDATE a sensor by the given id', (done) => {
       
-      var customer = {
-          "email" : "WilAime@prontonmail.com",
-          "name" : "DAMSIEN",
-          "active" : true
+      var sensor = {
+        "sensortype" : "output",
+        "numberofvehicle" : 12,
+        "idbollard" : 18
       }
       
       chai.request(server)
-        .put('/customers/23') // exemple
-        .send(customer)
+        .put('/sensors/2s') // exemple
+        .send(sensor)
         .end((err, res) => {
           res.should.have.status(200);
        res.body.should.be.a('object');
-       res.body.should.have.property('name').eql('DAMSIEN');
+       res.body.should.have.property('sensortype').eql('output');
 
             
               
@@ -248,16 +244,16 @@ describe('/PUT/:id ERROR', () => {
         });
   });
 }); 
-/*
-describe('/DELETE/:id customer', () => {
-    it('it should DELETE a customer by the given id', (done) => {
+
+describe('/DELETE/:id sensor', () => {
+    it('it should DELETE a sensor by the given id', (done) => {
           chai.request(server)
-          .delete('/customers/32') // exemple a changer
+          .delete('/sensors/14') // exemple 
           .end((err, res) => {
             res.should.have.status(200);
             res.body.should.be.a('object');
-            res.body.should.have.property('message').eql('Customer was deleted successfully!');
+            res.body.should.have.property('message').eql('Sensor was deleted successfully!');
             done();
           });
     });
-}); */
+}); 
